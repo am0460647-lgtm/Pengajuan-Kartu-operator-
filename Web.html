@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Pengajuan Kartu Operator</title>
+  <!-- Font & Ikon -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #f6f9fc 0%, #e9f0f5 100%);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .card {
+      max-width: 640px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 40px;
+      box-shadow: 0 30px 50px rgba(0, 20, 30, 0.12), 0 10px 20px rgba(0, 0, 0, 0.02);
+      padding: 32px 28px;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    /* header */
+    .form-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+      border-bottom: 2px solid #eef4f9;
+      padding-bottom: 20px;
+    }
+
+    .form-header i {
+      font-size: 28px;
+      color: #1f5b8a;
+      background: #e3edf7;
+      padding: 12px;
+      border-radius: 20px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .form-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #0b2a40;
+      margin: 0;
+    }
+
+    .form-header .badge {
+      margin-left: auto;
+      background: #dce8f3;
+      color: #1e4a6b;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+      background: #e4edf5;
+    }
+
+    /* section */
+    .section {
+      margin-top: 28px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a3a52;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      letter-spacing: -0.2px;
+    }
+
+    .section-title i {
+      font-size: 18px;
+      color: #2d6e9e;
+      width: 28px;
+      text-align: center;
+    }
+
+    .section-title:after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, #d3e2ee, transparent);
+      margin-left: 6px;
+    }
+
+    /* operator grid */
+    .operator-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .operator-item {
+      background: #f5faff;
+      border: 1.5px solid #e2edf8;
+      border-radius: 20px;
+      padding: 14px 8px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 15px;
+      color: #1e4a6b;
+      transition: 0.15s ease;
+      cursor: default;
+      box-shadow: 0 2px 4px rgba(0, 20, 30, 0.02);
+      letter-spacing: 0.2px;
+    }
+
+    .operator-item:hover {
+      background: #e2effa;
+      border-color: #b3cee6;
+      transform: scale(0.97);
+    }
+
+    .operator-item i {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 6px;
+      color: #1f5b8a;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: #7a8e9e;
+      font-weight: 500;
+      background: #f0f6fc;
+      padding: 8px 14px;
+      border-radius: 60px;
+      display: inline-block;
+      margin-top: 6px;
+      letter-spacing: 0.2px;
+    }
+
+    /* form group */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      color: #1f3f56;
+      margin-bottom: 6px;
+      letter-spacing: -0.1px;
+    }
+
+    .form-group label i {
+      margin-right: 8px;
+      color: #2d6e9e;
+      width: 18px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 14px 18px;
+      background: #f6faff;
+      border: 1.5px solid #e2edf8;
+      border-radius: 20px;
+      font-size: 15px;
+      color: #0b2a40;
+      transition: 0.2s;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #3d81b3;
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(54, 119, 173, 0.08);
+    }
+
+    .form-group input::placeholder {
+      color: #a5b9cb;
+      font-weight: 400;
+    }
+
+    .inline-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    /* detail pengajuan */
+    .detail-card {
+      background: #f5faff;
+      border-radius: 28px;
+      padding: 20px 22px;
+      margin: 10px 0 18px;
+      border: 1px solid #dce9f5;
+    }
+
+    .detail-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 16px;
+      margin-bottom: 12px;
+    }
+
+    .detail-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-row label {
+      font-weight: 600;
+      font-size: 14px;
+      color: #1f3f56;
+      min-width: 120px;
+    }
+
+    .detail-row select,
+    .detail-row input {
+      flex: 1;
+      padding: 12px 16px;
+      background: white;
+      border: 1.5px solid #dce9f5;
+      border-radius: 40px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: 0.2s;
+      min-width: 140px;
+    }
+
+    .detail-row select:focus,
+    .detail-row input:focus {
+      border-color: #3d81b3;
+      box-shadow: 0 0 0 4px rgba(54, 119, 173, 0.06);
+    }
+
+    /* payment */
+    .payment-box {
+      background: #eef5fc;
+      border-radius: 28px;
+      padding: 20px 22px;
+      margin: 12px 0 8px;
+      border: 1px solid #d3e2f0;
+    }
+
+    .payment-method {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      color: #124061;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    .payment-method i {
+      font-size: 22px;
+      color: #1f5b8a;
+      background: white;
+      padding: 10px;
+      border-radius: 18px;
+      box-shadow: 0 4px 8px rgba(0, 20, 30, 0.04);
+    }
+
+    .bank-info {
+      background: white;
+      border-radius: 24px;
+      padding: 16px 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      border: 1px solid #d3e2f0;
+      font-size: 14px;
+    }
+
+    .bank-info .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #e7eff6;
+    }
+
+    .bank-info .row:last-child {
+      border-bottom: 0;
+    }
+
+    .bank-info .label {
+      color: #4b6e89;
+      font-weight: 500;
+    }
+
+    .bank-info .value {
+      font-weight: 600;
+      color: #0b2a40;
+    }
+
+    .total-payment {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 14px 22px;
+      border-radius: 60px;
+      margin: 18px 0 12px;
+      border: 1.5px solid #b7d1e7;
+      font-weight: 700;
+      font-size: 18px;
+      color: #0b2a40;
+    }
+
+    .total-payment span:last-child {
+      background: #1a4b6e;
+      color: white;
+      padding: 6px 24px;
+      border-radius: 60px;
+      font-size: 20px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 10px rgba(22, 78, 120, 0.2);
+    }
+
+    /* submit */
+    .btn-submit {
+      width: 100%;
+      padding: 18px;
+      background: #1a4b6e;
+      border: none;
+      border-radius: 60px;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      transition: 0.2s;
+      box-shadow: 0 10px 20px -6px rgba(20, 70, 110, 0.25);
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-submit i {
+      font-size: 20px;
+    }
+
+    .btn-submit:hover {
+      background: #0f3855;
+      transform: scale(0.98);
+      box-shadow: 0 6px 14px -4px rgba(20, 70, 110, 0.3);
+    }
+
+    .footnote {
+      text-align: center;
+      font-size: 13px;
+      color: #6f8da5;
+      margin-top: 18px;
+      font-weight: 500;
+      background: #eef5fc;
+      padding: 12px 16px;
+      border-radius: 60px;
+    }
+
+    .footnote i {
+      margin-right: 8px;
+      color: #3476a3;
+    }
+
+    /* responsive */
+    @media (max-width: 550px) {
+      .card {
+        padding: 24px 16px;
+      }
+      .operator-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .inline-group {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+      .detail-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .detail-row label {
+        min-width: unset;
+        margin-bottom: 4px;
+      }
+      .total-payment {
+        flex-direction: column;
+        gap: 10px;
+        padding: 18px;
+      }
+      .form-header h1 {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <!-- HEADER -->
+    <div class="form-header">
+      <i class="fas fa-id-card"></i>
+      <h1>Form Pengajuan Kartu</h1>
+      <span class="badge"><i class="fas fa-asterisk" style="font-size: 10px;"></i> Operator</span>
+    </div>
+
+    <!-- PILIH OPERATOR -->
+    <div class="section">
+      <div class="section-title">
+        <i class="fas fa-signal"></i> Pilih Operator
+      </div>
+      <div class="operator-grid">
+        <div class="operator-item"><i class="fas fa-sim-card"></i> TELKOMSEL</div>
+        <div class="operator-item"><i class="fas fa-sim-card"></i> INDOSAT</div>
+        <div class="operator-item"><i class="fas fa-sim-card"></i> TRI</div>
+        <div class="operator-item"><i class="fas fa-sim-card"></i> AXIS</div>
+        <div class="operator-item"><i class="fas fa-sim-card"></i> XL</div>
+        <div class="operator-item"><i class="fas fa-sim-card"></i> SMARTFREN</div>
+      </div>
+      <div class="hint"><i class="fas fa-hand-pointer" style="margin-right: 8px;"></i> Pilih operator terlebih dahulu</div>
+    </div>
+
+    <!-- DATA DIRI -->
+    <div class="section">
+      <div class="section-title">
+        <i class="fas fa-user-circle"></i> Data Diri
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-user"></i> Nama Lengkap</label>
+        <input type="text" id="namaLengkap" placeholder="Masukkan nama lengkap" value="">
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-phone-alt"></i> Nomor HP Aktif</label>
+        <input type="text" id="nomorHp" placeholder="08xxxxxxxxxx" value="">
+      </div>
+    </div>
+
+    <!-- NIK, KK, ALAMAT (dari screenshot) -->
+    <div class="section">
+      <div class="section-title">
+        <i class="fas fa-address-card"></i> Identitas & Alamat
+      </div>
+      <div class="inline-group">
+        <div class="form-group">
+          <label><i class="fas fa-id-badge"></i> NIK KTP</label>
+          <input type="text" id="nik" placeholder="16 digit NIK" value="">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-users"></i> Nomor KK</label>
+          <input type="text" id="kk" placeholder="Nomor Kartu Keluarga" value="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-map-pin"></i> Alamat Lengkap</label>
+        <input type="text" id="alamat" placeholder="Masukkan alamat lengkap" value="">
+      </div>
+    </div>
+
+    <!-- DETAIL PENGAJUAN -->
+    <div class="section">
+      <div class="section-title">
+        <i class="fas fa-list-ul"></i> Detail Pengajuan
+      </div>
+      <div class="detail-card">
+        <div class="detail-row">
+          <label><i class="fas fa-tag"></i> Jenis Kartu</label>
+          <select id="jenisKartu">
+            <option>Pilih jenis kartu...</option>
+            <option selected>Kartu eSIM</option>
+            <option>Kartu Fisik</option>
+            <option>Kartu Dual</option>
+          </select>
+        </div>
+        <div class="detail-row">
+          <label><i class="fas fa-exclamation-triangle"></i> Keperluan</label>
+          <select id="keperluan">
+            <option selected>Kartu Hilang</option>
+            <option>Kartu Rusak</option>
+            <option>Kartu Baru</option>
+            <option>Ganti Nomor</option>
+          </select>
+        </div>
+        <div class="detail-row">
+          <label><i class="fas fa-undo-alt"></i> Nomor Yang Ingin Diganti</label>
+          <input type="text" id="nomorDiganti" placeholder="Masukkan nomor tujuan" value="">
+        </div>
+      </div>
+    </div>
+
+    <!-- KONTAK & PENGIRIMAN -->
+    <div class="section">
+      <div class="section-title">
+        <i class="fas fa-truck"></i> Kontak & Pengiriman
+      </div>
+      <div class="form-group">
+        <label><i class="fab fa-whatsapp"></i> Nomor WhatsApp Aktif</label>
+        <input type="text" id="wa" placeholder="08xxxxxxxxx" value="">
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-envelope"></i> Email Aktif</label>
+        <input type="email" id="email" placeholder="email@gmail.com" value="">
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-home"></i> Alamat Pengiriman</label>
+        <input type="text" id="alamatKirim" placeholder="Masukkan alamat pengiriman" value="">
+      </div>
+    </div>
+
+    <!-- PEMBAYARAN -->
+    <div class="section">
+      <div class="section-title">
+        <i class="fas fa-credit-card"></i> Pembayaran
+      </div>
+      <div class="payment-box">
+        <div class="payment-method">
+          <i class="fas fa-university"></i> Metode Pembayaran
+          <span style="background: #d3e2f0; padding: 6px 18px; border-radius: 40px; font-weight: 600; font-size: 14px; margin-left: 8px;">Transfer Bank E-WALLET</span>
+        </div>
+
+        <div class="bank-info">
+          <div class="row"><span class="label">Bank</span><span class="value">DANA</span></div>
+          <div class="row"><span class="label">No Rekening</span><span class="value">083185474978</span></div>
+          <div class="row"><span class="label">Atas Nama</span><span class="value"> S*****H</span></div>
+        </div>
+
+        <div class="total-payment">
+          <span><i class="fas fa-coins" style="margin-right: 8px;"></i> TOTAL PEMBAYARAN</span>
+          <span>Rp 260.000</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <button class="btn-submit" id="submitBtn"><i class="fas fa-paper-plane"></i> KIRIM PENGAJUAN</button>
+    <div class="footnote">
+      <i class="fas fa-check-circle"></i> Pastikan data yang diisi benar dan sesuai identitas.
+    </div>
+
+  </div>
+
+  <script>
+    (function() {
+      const submitBtn = document.getElementById('submitBtn');
+
+      // Fungsi untuk mengambil nilai input dengan aman
+      function getVal(id) {
+        const el = document.getElementById(id);
+        return el ? el.value.trim() : '';
+      }
+
+      // Fungsi untuk membuat pesan WhatsApp
+      function buildWhatsAppMessage() {
+        const nama = getVal('namaLengkap') || 'Tidak diisi';
+        const hp = getVal('nomorHp') || 'Tidak diisi';
+        const nik = getVal('nik') || 'Tidak diisi';
+        const kk = getVal('kk') || 'Tidak diisi';
+        const alamat = getVal('alamat') || 'Tidak diisi';
+        const jenisKartu = getVal('jenisKartu') || 'Tidak dipilih';
+        const keperluan = getVal('keperluan') || 'Tidak dipilih';
+        const nomorDiganti = getVal('nomorDiganti') || 'Tidak diisi';
+        const wa = getVal('wa') || 'Tidak diisi';
+        const email = getVal('email') || 'Tidak diisi';
+        const alamatKirim = getVal('alamatKirim') || 'Tidak diisi';
+
+        const message = 
+`*FORM PENGAJUAN KARTU OPERATOR*
+
+*DATA DIRI*
+Nama Lengkap: ${nama}
+Nomor HP Aktif: ${hp}
+
+*IDENTITAS & ALAMAT*
+NIK KTP: ${nik}
+Nomor KK: ${kk}
+Alamat Lengkap: ${alamat}
+
+*DETAIL PENGAJUAN*
+Jenis Kartu: ${jenisKartu}
+Keperluan: ${keperluan}
+Nomor Yang Ingin Diganti: ${nomorDiganti}
+
+*KONTAK & PENGIRIMAN*
+Nomor WhatsApp: ${wa}
+Email: ${email}
+Alamat Pengiriman: ${alamatKirim}
+
+*PEMBAYARAN*
+Metode: Transfer Bank DANA
+Total: Rp 260.000
+
+--- 
+Terima kasih, data sudah saya kirimkan.`;
+
+        return encodeURIComponent(message);
+      }
+
+      submitBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        // Nomor admin WhatsApp (gunakan angka saja, tanpa spasi atau tanda)
+        const adminNumber = '6283185764261'; // 083185764261 → 6283185764261
+
+        const pesan = buildWhatsAppMessage();
+        const url = `https://wa.me/${adminNumber}?text=${pesan}`;
+
+        // Buka di tab baru
+        window.open(url, '_blank');
+      });
+
+    })();
+  </script>
+</body>
+</html>
